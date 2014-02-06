@@ -1,0 +1,64 @@
+
+<div class="container">
+	<div class="inner">
+
+	</div>
+	
+</div>
+<div class="workarea" id="anagrams">
+		<%=form_tag check_anagram_path do %>
+		<%= text_field :firstword,'', :placeholder=>"First Word", :class=>"tbox", :required=>"required"%>
+		<%= text_field :secondword,'', :placeholder=>"Second Word", :class=>"tbox", :required=>"required"%>
+		<%= submit_tag "Submit", :class=>"tbox button"%>
+		<% end %>
+		
+</div>
+<div class="workarea" id="found">
+
+		<div><h1 class="tbox rt_text st" style="text-align: center">You found ANAGRAMS!!</h1>
+			<%= text_field :firstword,'', :value=>@wd1, :class=>"tbox rt_text st", :required=>"required", :disabled=>"disabled"%>
+		<%= text_field :secondword,'', :value=>@wd2, :class=>"tbox rt_text st", :required=>"required", :disabled=>"disabled"%>
+			<input type="button" value="Check New Words" onclick="toggle_visibility()" class="tbox right st"/>
+		</div>
+</div>
+<div class="workarea" id="notfound">
+		
+		<div><h1 class="tbox wr_text">Looks like the words you entered are not Anagrams!</h1>
+			<input type="button" value="Try Again" onclick="toggle_visibility()" class="tbox wrong"/>
+		</div>
+	</div>
+
+<%= javascript_tag do %>
+	var result= "<%= @foo %>";
+	console.log(result);
+	var v='';
+	var u=document.getElementById('anagrams');
+	if(result=="true")
+	{
+		console.log("going true");
+
+		v=document.getElementById('found');
+		toggle_visibility();
+	}
+	else if (result=="false") 
+		{
+		console.log("going false");
+
+		v=document.getElementById('notfound');
+			toggle_visibility();
+		}
+	function toggle_visibility() {
+     if(v.style.display == "block")
+     {
+     	console.log("in sign off");
+     	u.style.display="block";
+         v.style.display = 'none';
+     }
+      else
+      {
+      	console.log("in sigin in");
+     	u.style.display='none';
+         v.style.display = 'block';
+     }
+ }
+<% end %>
